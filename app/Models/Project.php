@@ -20,6 +20,10 @@ class Project extends Model
         return asset('storage/' . $this->image);
     }
 
+    public function tecnologies(){
+        return $this->belongsToMany(Tecnology::class);
+    }
+
     public function type(){
         return $this->belongsTo(Type::class);
     }
