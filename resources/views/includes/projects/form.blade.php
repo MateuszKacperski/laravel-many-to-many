@@ -96,7 +96,25 @@
         
         </div>
         </div>
-        <div class="col-12 d-flex justify-content-end">
+        <div class="col-10">
+            <div class="mt-3">
+                <div class="form-group @error('tecnologies') is-invalid @enderror">
+                    <p>Seleziona le tipologie di questo progetto</p>
+                @foreach ($tecnologies as $tecnology)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="tecnologies[]" id="{{"tec-$tecnology->id"}}" value="{{$tecnology->id}}" @if(in_array($tecnology->id, old('tecnologies', $prev_tecnologies ?? []))) checked @endif>
+                    <label class="form-check-label" for="{{"tec-$tecnology->id"}}">{{$tecnology->label}}</label>
+                  </div>
+                @endforeach
+            </div>
+                @error('tecnologies')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox"  id="is_published" name="is_published" value="1" @if(old('is_published', $project->is_published)) checked @endif>
                 <label class="form-check-label" for="is_published">
